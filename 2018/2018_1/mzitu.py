@@ -21,7 +21,7 @@ HEADERS = {
     'Referer': 'http://www.mzitu.com'
 }
 
-DIR_PATH = r"/Users/jtusta/PycharmProjects/Python/2018/2018_1/mzitu"  # 下载图片保存路径
+DIR_PATH = r"/Users/jtusta/Pictures/mzitu"  # 下载图片保存路径
 
 
 def get_urls():
@@ -129,3 +129,6 @@ if __name__ == "__main__":
         time.sleep(30)
         delete_empty_dir(DIR_PATH)
         pool.map(urls_crawler, urls)
+
+
+
