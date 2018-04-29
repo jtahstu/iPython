@@ -11,10 +11,10 @@ def init():
     批量更新所有包
     :return:
     """
-    import pip
+    import pip3
     from subprocess import call
 
-    for dist in pip.get_installed_distributions():
+    for dist in pip3.get_installed_distributions(local_only=False):
         call("pip3 install --upgrade " + dist.project_name, shell=True)
 
 
