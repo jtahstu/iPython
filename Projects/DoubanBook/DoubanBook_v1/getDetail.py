@@ -112,7 +112,7 @@ def getSeriesApi(series_ids):
 def init():
     # ids = getSubjectId()
     # getApi(ids)
-    # series_ids = getSeriesID()
+    #series_ids = getSeriesID()
     series_ids = getSeriesIdV2()
     print(len(series_ids))
     getSeriesApi(series_ids)

@@ -29,12 +29,11 @@ def getComment(url):
 
 def init():
     # bookIDs = getBookID()
-    bookIDs = [1082154, 1770782, 25862578]
+    bookIDs = [1770782, 25862578]
     for id in bookIDs:
         comments = getComment('https://book.douban.com/subject/{}/comments/'.format(id))
-        break
-        # res = Tool.db.db_book_comment.insertMany(comments)
-        # print(res)
+        res = Tool.db.db_book_comment.insertMany(comments)
+        print(res)
 
 
 if __name__ == "__main__":

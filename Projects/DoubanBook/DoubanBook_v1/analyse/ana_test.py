@@ -18,6 +18,9 @@ import Tool
 def calcCrawlCount():
     rid = Tool.db.db_book_detail.find({}, {'id': 1})
     ready_ids = set([i['id'] for i in rid])
+    # rid2 = Tool.db.db_book_detail_noscore.find({},{'id':1})
+    # ready_ids.add(set([i['id'] for i in rid2]))
+
     aid = Tool.db.db_book_id.find({}, {'subject_id': 1})
     all_ids = set([j['subject_id'] for j in aid])
     print('已爬取的数量和总数', len(ready_ids), len(all_ids))
@@ -45,12 +48,7 @@ def test():
     s = Counter(series_id)
     # pprint(s.most_common()[0:20])
 
+# test()
+# scoreDescribe()
+calcCrawlCount()
 
-def init():
-    # test()
-    # scoreDescribe()
-    calcCrawlCount()
-
-
-if __name__ == "__main__":
-    init()

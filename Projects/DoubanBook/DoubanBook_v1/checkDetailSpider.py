@@ -63,7 +63,7 @@ def autorun():
     }
     json = requests.get('https://i.jtup.cc/api/mail', params=mail)
     pprint(json)
-    os.system('python3 /root/iPython/Douban/getDetail.py >> /root/iPython/Douban/checkDetailSpider.log')
+   # os.system('python3 /root/iPython/Douban/getDetail.py >> /root/iPython/Douban/checkDetailSpider.log')
 
 
 def init():

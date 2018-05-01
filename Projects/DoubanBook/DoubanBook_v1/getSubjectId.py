@@ -14,8 +14,8 @@ import time
 import pymongo
 from datetime import datetime
 
-# db = MongoClient('mongodb://jtahstu:jtahstu@127.0.0.1:27017/').iApp
-db = MongoClient('mongodb://127.0.0.1:27017/').iApp
+db = MongoClient('mongodb://jtahstu:jtahstu@127.0.0.1:27017/').iApp
+#db = MongoClient('mongodb://127.0.0.1:27017/').iApp
 
 
 def getHtml(url):
@@ -31,6 +31,10 @@ def getHtml(url):
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/527.36 (KHTML, like Gecko) Chrome/60.0.3239.132 Safari/527.36'
     }
+    # proxies = [
+    #     "101.53.101.172:9999","171.117.93.229:8118","119.251.60.37:21387","58.246.194.70:8080",
+    #     "115.173.218.224:9797","110.77.0.70:80"
+    # ]
     html = requests.get(url, headers=headers)
     if html.status_code != 200:
         print('status_code is %d' % html.status_code)
