@@ -66,4 +66,3 @@ for i in range(0, 10):
     movieUrl = "https://movie.douban.com/top250?start=" + str(i * 25)
     getMovies(movieUrl)
     time.sleep(2)
-

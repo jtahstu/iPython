@@ -30,83 +30,83 @@ headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
 
 def db(type, rank, detail=[]):
     res = ""
-    connection = pymysql.connect (host='localhost',
-                                  user='jtahstu',
-                                  password='jtahstu',
-                                  db='python',
-                                  port=3306,
-                                  charset='utf8')
-    cursor = connection.cursor ()
+    connection = pymysql.connect(host='localhost',
+                                 user='jtahstu',
+                                 password='jtahstu',
+                                 db='python',
+                                 port=3306,
+                                 charset='utf8')
+    cursor = connection.cursor()
     if type == 1:
         sql = 'select detail_url,title from douban_movie_top250 where rank=%s'
-        cursor.execute (sql, (str (rank)));
-        res = cursor.fetchone ()
+        cursor.execute(sql, (str(rank)));
+        res = cursor.fetchone()
     elif type == 2:
         sql = 'insert into douban_movie_top250_details(rank,dirsctor, screenwriter, starring, type, location, language, rel_time, len, other_names, imdb, introduce)' \
               'values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
-        count = cursor.execute (sql, (
+        count = cursor.execute(sql, (
             rank, detail[0], detail[1], detail[2], detail[3], detail[4], detail[5], detail[6], detail[7], detail[8],
             detail[9], detail[10]))
         if count:
-            res = 'insert rank ' + str (rank) + ' ok'
+            res = 'insert rank ' + str(rank) + ' ok'
         else:
-            res = 'insert rank ' + str (rank) + ' fail'
-    connection.commit ()
-    cursor.close ()
-    connection.close ()
+            res = 'insert rank ' + str(rank) + ' fail'
+    connection.commit()
+    cursor.close()
+    connection.close()
     return res
 
 
 def getUrl(rank):
-    res = db (1, rank)
+    res = db(1, rank)
     return res[0]
 
 
 def getTitle(rank):
-    res = db (1, rank)
+    res = db(1, rank)
     return res[1]
 
 
 def downPics(url, path, rank, count):
-    html = requests.get (url, headers=headers)
-    soup = BeautifulSoup (html.text, "html.parser")
-    span = soup.select (".mainphoto")
-    if len (span) > 0:
+    html = requests.get(url, headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
+    span = soup.select(".mainphoto")
+    if len(span) > 0:
         picRealUrl = span[0].img["src"]
-        conn = urllib.request.urlopen (picRealUrl)
-        f = open (path, 'wb')
-        f.write (conn.read ())
-        f.close ()
-        print ("下载 rank " + str (rank) + " 的第 " + str (count) + " 张图片 ok !")
+        conn = urllib.request.urlopen(picRealUrl)
+        f = open(path, 'wb')
+        f.write(conn.read())
+        f.close()
+        print("下载 rank " + str(rank) + " 的第 " + str(count) + " 张图片 ok !")
 
 
 def getPics(url, rank, page):
-    html = requests.get (url, headers=headers)
-    soup = BeautifulSoup (html.text, "html.parser")
-    cover = soup.select (".cover")
+    html = requests.get(url, headers=headers)
+    soup = BeautifulSoup(html.text, "html.parser")
+    cover = soup.select(".cover")
     count = 0
-    picPath = 'C:\\Users\\jtahstu\\Desktop\\DoubanTop250Pics\\' + str (rank) + " " + getTitle (rank)
-    if not os.path.isdir (picPath):
-        os.mkdir (picPath)
+    picPath = 'C:\\Users\\jtahstu\\Desktop\\DoubanTop250Pics\\' + str(rank) + " " + getTitle(rank)
+    if not os.path.isdir(picPath):
+        os.mkdir(picPath)
     for i in cover:
         picUrl = i.a["href"]
         count += 1
         countt = count + (page - 1) * 40
-        name = str (countt) + ".jpg"
+        name = str(countt) + ".jpg"
         picPathSave = picPath + "\\" + name
-        downPics (picUrl, picPathSave, rank, countt)
-        time.sleep (1)
+        downPics(picUrl, picPathSave, rank, countt)
+        time.sleep(1)
 
 
 rank = 250
 pages = 5
-for rank in range (153, rank + 1):
-    print ("正在抓取rank %d" % rank)
-    for page in range (1, pages + 1):
+for rank in range(153, rank + 1):
+    print("正在抓取rank %d" % rank)
+    for page in range(1, pages + 1):
         try:
-            url = getUrl (rank) + "photos?type=S&start=" + str ((page - 1) * 40) + "&sortby=vote&size=a&subtype=a"
-            getPics (url, rank, page)
+            url = getUrl(rank) + "photos?type=S&start=" + str((page - 1) * 40) + "&sortby=vote&size=a&subtype=a"
+            getPics(url, rank, page)
         except Exception as e:
             print("错误信息：{0}".format(e))
-            print ("抓取 rank %d 的第 %d 页图片失败 ！" % (rank, page))
+            print("抓取 rank %d 的第 %d 页图片失败 ！" % (rank, page))
             continue

@@ -26,7 +26,14 @@ def getHtml(url):
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
     }
-    html = requests.get(url, headers=headers, timeout=10)
+    try:
+        html = requests.get(url, headers=headers, timeout=10)
+    except Exception as e:
+        print(e)
+        sleep_sec = random.randrange(60, 120)
+        print('random wait %ds' % (sleep_sec))
+        time.sleep(sleep_sec)
+        getHtml(url)
     if html.status_code == 404:
         time.sleep(random.randrange(35, 45))
         return '''{

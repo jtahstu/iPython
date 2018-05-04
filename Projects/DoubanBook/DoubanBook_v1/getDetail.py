@@ -11,6 +11,7 @@ from pprint import pprint
 from Tool import getHtml
 from Tool import db
 from Tool import readySeries
+from Tool import getDateTime
 
 
 def checkDetailExist(id):
@@ -26,6 +27,7 @@ def saveBook(book):
         pprint(book)
         return
     if not checkDetailExist(book['id']):  # 数据库不存在插入
+        book['addtime'] = getDateTime()
         if book['rating']['average'] != '0.0':
             db.db_book_detail.insert_one(dict(book))
             print('book id {} is ok , insert into detail'.format(book['id']))
@@ -110,12 +112,12 @@ def getSeriesApi(series_ids):
 
 
 def init():
-    # ids = getSubjectId()
-    # getApi(ids)
+    ids = getSubjectId()
+    getApi(ids)
     #series_ids = getSeriesID()
-    series_ids = getSeriesIdV2()
-    print(len(series_ids))
-    getSeriesApi(series_ids)
+    # series_ids = getSeriesIdV2()
+    # print(len(series_ids))
+    # getSeriesApi(series_ids)
 
 
 if __name__ == "__main__":
