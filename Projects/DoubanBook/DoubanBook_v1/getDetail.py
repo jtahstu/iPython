@@ -26,31 +26,34 @@ def saveBook(book):
     if 'id' not in book.keys():  # 不是有效数据
         pprint(book)
         return
-    if not checkDetailExist(book['id']):  # 数据库不存在插入
-        book['addtime'] = getDateTime()
-        if book['rating']['average'] != '0.0':
-            db.db_book_detail.insert_one(dict(book))
-            print('book id {} is ok , insert into detail'.format(book['id']))
-        else:
-            db.db_book_detail_noscore.insert_one(dict(book))
-            print('book id {} is ok , insert into detail_noscore'.format(book['id']))
+    book['addtime'] = getDateTime()
+    if book['rating']['average'] != '0.0':
+        db.db_book_detail.insert_one(dict(book))
+        print('book id {} is ok , insert into detail'.format(book['id']))
     else:
-        print('book id {} is exist'.format(book['id']))
+        db.db_book_detail_noscore.insert_one(dict(book))
+        print('book id {} is ok , insert into detail_noscore'.format(book['id']))
 
 
 def getApi(ids):
     base_url = 'https://api.douban.com/v2/book/'
     for id in ids:
+        # if not checkDetailExist(id):  # 数据库不存在
         url = base_url + str(id)
         book = getHtml(url)
         saveBook(json.loads(book))
+        # else:
+        #     print('book id {} is exist'.format(id))
 
 
 def getSubjectId():
     res = db.db_book_id.find({}, {'subject_id': 1})
     ready = db.db_book_detail.find({}, {'id': 1})
+    ready_noscore = db.db_book_detail_noscore.find({}, {'id': 1})
     ready_ids = []
     for item in ready:
+        ready_ids.append(item['id'])
+    for item in ready_noscore:
         ready_ids.append(item['id'])
     ids = []
     for item in res:
@@ -114,7 +117,7 @@ def getSeriesApi(series_ids):
 def init():
     ids = getSubjectId()
     getApi(ids)
-    #series_ids = getSeriesID()
+    # series_ids = getSeriesID()
     # series_ids = getSeriesIdV2()
     # print(len(series_ids))
     # getSeriesApi(series_ids)

@@ -30,7 +30,7 @@ def getHtml(url):
         html = requests.get(url, headers=headers, timeout=10)
     except Exception as e:
         print(e)
-        sleep_sec = random.randrange(60, 120)
+        sleep_sec = random.randrange(600, 1200)
         print('random wait %ds' % (sleep_sec))
         time.sleep(sleep_sec)
         getHtml(url)

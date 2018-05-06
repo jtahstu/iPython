@@ -22,6 +22,7 @@ def get2DBCount():
 def checkDetailCount():
     pprint([Tool.getDateTime(), 'checkDetailCount start'])
     counts = [x for x in Tool.db.temp.find({'type': 'db_detail_count'})]
+    detail = detail_noscore = {}
     for count in counts:
         if count['flag'] == 'detail_count':
             detail = dict(count)
@@ -57,13 +58,15 @@ def checkCurrentScript():
 def autorun():
     pprint([Tool.getDateTime(), 'autorun script start'])
     mail = {
-        'msg': Tool.getDateTime() + u'  豆瓣爬虫脚本貌似不正常，已重新启动',
+        'msg': Tool.getDateTime() + u'  home\'s豆瓣爬虫脚本不正常',
         'toUser': 'root@jtahstu.com',
         'verify': Tool.md5('jtahstu' + Tool.getDate())
     }
     json = requests.get('https://i.jtup.cc/api/mail', params=mail)
     pprint(json)
-   # os.system('python3 /root/iPython/Douban/getDetail.py >> /root/iPython/Douban/checkDetailSpider.log')
+
+
+# os.system('python3 /root/iPython/Douban/getDetail.py >> /root/iPython/Douban/checkDetailSpider.log')
 
 
 def init():
