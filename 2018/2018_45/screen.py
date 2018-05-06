@@ -47,9 +47,8 @@ browser = webdriver.Firefox()
 driver = webdriver.PhantomJS()
 driver.set_page_load_timeout(5)
 driver.maximize_window()  # 设置全屏
-driver.set_window_size('1920','1080')
 try:
-    driver.get("https://www.zhainanfulishe.net/11607.html")
+    driver.get("https://juejin.im/post/5ae55861f265da0ba062ec71")
     driver.save_screenshot("./tsm.png")
 except Exception as e:
     print(e)

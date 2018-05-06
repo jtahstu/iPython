@@ -5,7 +5,7 @@ import time
 
 API_KEY = 'a3a52ca53821762b3fb458b63b6e16da'
 TULINURL = "http://www.tuling123.com/openapi/api?key=%s&info=" % API_KEY
-tail = "\n\n     —— 来自PHP程序猿Jin Tao同学MBP专属微信客户端的自动回复 n(*≧▽≦*)n "
+tail = "\n\n     —— 来自Jin Tao同学微信专属客户端的自动回复 n(*≧▽≦*)n "
 
 
 def getHtml(url):
