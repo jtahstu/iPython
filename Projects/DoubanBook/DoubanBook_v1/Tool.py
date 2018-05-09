@@ -12,7 +12,7 @@ from pymongo import MongoClient
 
 
 def getHtml(url):
-    print('request url {}'.format(url))
+    print('{} request url {}'.format(getDateTime(), url))
     # salt = ''.join(random.sample(string.ascii_letters + string.digits, 11))
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',

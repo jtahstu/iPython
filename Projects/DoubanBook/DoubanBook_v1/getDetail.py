@@ -29,10 +29,10 @@ def saveBook(book):
     book['addtime'] = getDateTime()
     if book['rating']['average'] != '0.0':
         db.db_book_detail.insert_one(dict(book))
-        print('book id {} is ok , insert into detail'.format(book['id']))
+        print('{} book id {} is ok , insert into detail'.format(getDateTime(), book['id']))
     else:
         db.db_book_detail_noscore.insert_one(dict(book))
-        print('book id {} is ok , insert into detail_noscore'.format(book['id']))
+        print('{} book id {} is ok , insert into detail_noscore'.format(getDateTime(), book['id']))
 
 
 def getApi(ids):
