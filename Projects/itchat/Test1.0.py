@@ -5,7 +5,8 @@ import time
 
 API_KEY = 'a3a52ca53821762b3fb458b63b6e16da'
 TULINURL = "http://www.tuling123.com/openapi/api?key=%s&info=" % API_KEY
-tail = "\n\n     —— 来自Jin Tao同学微信专属客户端的自动回复 n(*≧▽≦*)n "
+# tail = "\n\n     —— 来自Jin Tao同学微信专属客户端的自动回复 n(*≧▽≦*)n "
+tail = ""
 
 
 def getHtml(url):
@@ -25,6 +26,6 @@ def text_reply(msg):
     return dic_json['text'] + tail
 
 
-itchat.auto_login(enableCmdQR=2)
+itchat.auto_login(hotReload=True)
 itchat.run()
 
