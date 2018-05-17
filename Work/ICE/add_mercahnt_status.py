@@ -5,6 +5,7 @@
 @time: 2018/5/13 04:02
 @des: ice 首批上线商家3469个，有的商家是多语言的,把CSDE/CSFR,非英语去掉，如果还是多，取第一个
         ./data/ice_mercahnt_status.csv 就是要上线的商家列表
+        之前已经把单语言的商家导进去了，这里只是把多语言的挑出来，过滤一下，再导进去
 """
 
 from pprint import pprint
