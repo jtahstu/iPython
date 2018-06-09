@@ -41,7 +41,10 @@ def getHtml(url):
   "code": 6014,
   "request": "GET /v2/book/series/14/books"
 }'''
+<<<<<<< HEAD
         3
+=======
+>>>>>>> a5ed7a856c0f96f17f84c65bc4c8df67b94fa0f0
     if html.status_code != 200:
         sleep_sec = random.randrange(600, 1200)
         print('status_code is %d , error msg is %s , random wait %ds' % (html.status_code, html.text, sleep_sec))
