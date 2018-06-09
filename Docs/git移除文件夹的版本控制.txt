@@ -1,0 +1,5 @@
+1.执行 git rm -r -n --cached "bin/"   ，此命令是展示要删除的文件表预览
+2.执行 git rm -r --cached  "bin/"     ，删除文件的命令.
+3.执行 git commit -m" 删除bin文件"    ，提交，并加注释
+4.执行 git push origin master   　　　，提交到远程服务器
+5.在.gitignore文件中添加 bin/，并提交 .gitignore 文件

@@ -1,0 +1,1 @@
+D:\Environment\MongoDB\bin\mongod --dbpath D:\Environment\MongoData

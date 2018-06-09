@@ -1,0 +1,109 @@
+#+TITLE: Crawler
+
+* 爬虫集
+  :PROPERTIES:
+  :ID:       aef07119-226a-4c8a-b5db-bad3bd9372a2
+  :END:
+  互联网招聘网址爬虫如下：
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/lagou.py][拉勾]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/zhipin.py][boss直聘]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/liepin.py][猎聘]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/neitui.py][内推]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/a100offer.py][100offer]]
+
+  互联网知名公司招聘信息爬虫如下：
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/alibaba.py][阿里巴巴]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/baidu.py][百度]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/meituan.py][美团]]
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/didi.py][滴滴出行]]
+
+  内容服务商爬虫:
+  + [[https://github.com/brantou/crawler/blob/master/jobs/jobs/spiders/zhihu.py][知乎]]
+
+* 爬虫脚手架
+  :PROPERTIES:
+  :ID:       81f440f1-d59b-43f6-ad35-049f8fd5a984
+  :END:
+** pipeline
+   :PROPERTIES:
+   :ID:       2a53dd96-b2a6-4ed4-832b-b18a19715587
+   :END:
+  目前只有两个 *pipeline* , 一个使用mongo做数据存储，一个使用set做数据的判重, 点击[[https://github.com/brantou/crawler/blob/master/jobs/jobs/pipelines.py][查看源码]]。
+
+** middleware
+   :PROPERTIES:
+   :ID:       d6986286-b0b1-4374-b5ba-40ff87f30722
+   :END:
+  目前只有两个 *middleware* ，一个使用 [[https://pypi.python.org/pypi/fake-useragent][fake_useragent]] 来生成随机UA，一个用于使用http代理列表, 点击[[https://github.com/brantou/crawler/blob/master/jobs/jobs/middlewares.py][查看源码]]。
+
+* 工具集
+  :PROPERTIES:
+  :ID:       36d63ee1-ce84-47cd-8358-3e2e56e2739d
+  :END:
+** 抓取免费代理
+   :PROPERTIES:
+   :ID:       eea5f4a1-c787-4e69-b444-1d8728f0bf1c
+   :END:
+   抓取代理网站中给出的免费代理, 并初步校验,点击[[https://github.com/brantou/crawler/blob/master/utils/free_proxy.py][查看源码]]！
+   目前抓取的代理网站如下：
+   + [[http://www.kxdaili.com/dailiip.html][开心代理]]
+   + [[http://www.kxdaili.com/dailiip.html][米扑代理]]
+   + [[http://www.kxdaili.com/dailiip.html][西刺代理]]
+   + [[http://www.ip181.com/daili/1.html][ip181]]
+   + [[http://www.httpdaili.com/mfdl/][httpdaili]]
+   + [[http://www.66ip.cn/index.html][66ip]]
+   + [[http://www.data5u.com/][无忧代理]]
+   + [[http://www.kuaidaili.com/free/][快代理]]
+   + [[http://www.ip002.net/free.html][ip002]]
+
+** 代理验证
+   :PROPERTIES:
+   :ID:       a64313fa-985b-41e1-8f3a-33a37d99cd76
+   :END:
+   使用 [[https://httpbin.org/][httpbin]] 来测验代理的时效性和种类。
+
+** IP信息获取
+   :PROPERTIES:
+   :ID:       309ed608-69c2-4cb6-bff2-f489711fbdbc
+   :END:
+   使用 [[http://api.geoiplookup.net/][geoiplookup]] 用于查询IP信息。
+
+   示例如下:
+   #+BEGIN_SRC python :session ip-info :results output pp :exports both
+     from utils.ip_info import get_ip_info
+
+     print(get_ip_info('8.8.8.8'))
+   #+END_SRC
+
+   #+RESULTS:
+   : {u'countrycode': u'US', u'ip': u'8.8.8.8', u'isp': u'Google', u'longitude': u'-97.822', u'countryname': u'United States', u'host': u'8.8.8.8', u'latitude': u'37.751'}
+
+** 翻译函数
+   :PROPERTIES:
+   :ID:       81779fb7-c9a7-4be6-b34b-0be8bb03216c
+   :END:
+   目前只做了简单封装，支持如下：
+   + 有道词典
+     #+BEGIN_SRC python :session translate :results output pp :exports both
+       from utils.translate import translate
+       import json
+
+       print(translate(u'努力工作', dict_name='youdao')['translateResult'][0][0]['tgt'])
+       print(translate(u'hard work', dict_name='youdao', lfrom='en', lto='zh-CHS')['translateResult'][0][0]['tgt'])
+     #+END_SRC
+
+     #+RESULTS:
+     : To work hard
+     : 努力工作
+
+   + 百度翻译
+     #+BEGIN_SRC python :session translate :results output pp :exports both
+       from utils.translate import translate
+
+       print(translate(u'努力工作', dict_name='baidu')[0]['dst'])
+       print(translate(u'hard work', dict_name='baidu', lfrom='en', lto='zh-CHS')[0]['dst'])
+     #+END_SRC
+
+     #+RESULTS:
+     : Work hard
+     : 艰苦的工作

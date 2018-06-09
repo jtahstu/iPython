@@ -1,0 +1,25 @@
+1. Py Code Template
+
+#!/usr/bin/env python
+#-*- coding:utf-8 -*-
+
+# Version: ??
+# Author: jtahstu
+# Contact: root@jtahstu.com
+# Site: http://blog.jtahstu.com
+# Software: ${PRODUCT_NAME}
+# Time: ${DATE} ${TIME}
+
+
+def init():
+    pass
+
+
+
+if __name__ == '__main__':
+    init()
+
+
+
+
+
