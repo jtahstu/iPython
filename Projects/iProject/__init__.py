@@ -1,5 +1,3 @@
-1. Py Code Template
-
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
@@ -7,19 +5,13 @@
 # Author: jtahstu
 # Contact: root@jtahstu.com
 # Site: blog.jtahstu.com
-# Software: ${PRODUCT_NAME}
-# Time: ${DATE} ${TIME}
+# Software: PyCharm
+# Time: 2018/6/10 18:55
 
 
 def init():
     pass
 
 
-
 if __name__ == '__main__':
     init()
-
-
-
-
-
