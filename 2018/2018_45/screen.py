@@ -31,28 +31,28 @@
 # driver.close()
 
 
-# from selenium import webdriver
-# options = webdriver.FirefoxOptions()
-# options.set_headless()
-# # options.add_argument(‘-headless‘)
-# options.add_argument('--disable-gpu')
-# driver=webdriver.Firefox(firefox_options=options)
-# driver.get('https://www.zhainanfulishe.net/4955.html')
-# driver.get_screenshot_as_file('test.png')
-# driver.close()
-
 from selenium import webdriver
-
-browser = webdriver.Firefox()
-driver = webdriver.PhantomJS()
-driver.set_page_load_timeout(5)
-driver.maximize_window()  # 设置全屏
-try:
-    driver.get("https://juejin.im/post/5ae55861f265da0ba062ec71")
-    driver.save_screenshot("./tsm.png")
-except Exception as e:
-    print(e)
-
+options = webdriver.FirefoxOptions()
+# options.set_headless()
+options.add_argument('-headless')
+# options.add_argument('--disable-gpu')
+driver=webdriver.Firefox(firefox_options=options)
+driver.get('https://www.fyvor.com/')
+driver.get_screenshot_as_file('fyvor.png')
 driver.close()
-browser.close()
+
+# from selenium import webdriver
+#
+# browser = webdriver.Firefox()
+# driver = webdriver.PhantomJS()
+# driver.set_page_load_timeout(5)
+# driver.maximize_window()  # 设置全屏
+# try:
+#     driver.get("https://juejin.im/post/5ae55861f265da0ba062ec71")
+#     driver.save_screenshot("./tsm.png")
+# except Exception as e:
+#     print(e)
+#
+# driver.close()
+# browser.close()
 # print(data)

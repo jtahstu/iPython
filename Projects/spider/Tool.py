@@ -23,7 +23,7 @@ def getHtml(url):
         'Connection': 'keep-alive',
         'Cookie': 'bid=2cTNtmWtjjc',
         'DNT': '1',
-        'Host': 'www.zhainanfulishe.net',
+        'Host': url,
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36'
     }
