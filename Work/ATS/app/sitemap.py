@@ -4,7 +4,8 @@
 @site: http://blog.jtahstu.com
 @time: 2018/7/15 01:36
 """
-import time
+import time, sys
+sys.path.append('/Users/jtusta/PycharmProjects/iPython/Work/ATS')
 
 from lib import Common
 from pprint import pprint

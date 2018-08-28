@@ -15,8 +15,14 @@ from lib import Common
 imysql = iMySQL
 imongo = iMongo
 
-import os
+import os, time
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 PUBLIC_ROOT = PROJECT_ROOT + "/public/"
 SITEMAP_ROOT = PROJECT_ROOT + "/public/sitemap/"
+
+# index
+screen_image_path = PUBLIC_ROOT + "index/screen/"
+screen_all_output = PUBLIC_ROOT + "index/screen_all_" + time.strftime("%Y%m%d%H%M%S", time.localtime()) + ".png"
+coupon_data_path = PUBLIC_ROOT + "index/coupon/"
+coupon_data_output = PUBLIC_ROOT + "index/coupon_data_" + time.strftime("%Y%m%d%H%M%S", time.localtime()) + ".json"
