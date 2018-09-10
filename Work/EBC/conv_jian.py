@@ -16,13 +16,14 @@ def init():
     file_path = '/Users/jtusta/PycharmProjects/iPython/Work/EBC/file/'
     file_out_path = '/Users/jtusta/PycharmProjects/iPython/Work/EBC/file_out/'
     files = os.listdir(file_path)
-    i = '_cht'
     for file in files:
+        # if not file.endswith('sql'):
+        #     continue
         with open(file_path + file, encoding='utf-8', mode='r') as r:
             codes = r.readlines()
             print(len(codes))
 
-        with open(file_out_path + file.replace('.php', i + '.php'), encoding='utf-8', mode='a') as w:
+        with open(file_out_path + file, encoding='utf-8', mode='a') as w:
             for line in codes:
                 xx = HanziConv.toTraditional(line)
                 w.write(xx)

@@ -118,18 +118,18 @@ def init():
     print('start vertical merger images')
     iImage.verticalMerger(const.screen_image_path, const.screen_all_output)
 
-    # 促销数据合并
-    print('start merger index coupon data')
-    all_coupon_data = []
-    for coupon_file in Common.getSortedDirList(const.coupon_data_path):
-        site = coupon_file.split('.')[0]
-        with open(const.coupon_data_path + coupon_file, 'r') as r:
-            data = json.load(r)
-            for (key, item) in enumerate(data):
-                data[key].update({'site': site})
-            all_coupon_data.append(data)
-    with open(const.coupon_data_output, 'w') as w:
-        w.writelines(json.dumps(all_coupon_data))
+    # # 促销数据合并
+    # print('start merger index coupon data')
+    # all_coupon_data = []
+    # for coupon_file in Common.getSortedDirList(const.coupon_data_path):
+    #     site = coupon_file.split('.')[0]
+    #     with open(const.coupon_data_path + coupon_file, 'r') as r:
+    #         data = json.load(r)
+    #         for (key, item) in enumerate(data):
+    #             data[key].update({'site': site})
+    #         all_coupon_data.append(data)
+    # with open(const.coupon_data_output, 'w') as w:
+    #     w.writelines(json.dumps(all_coupon_data))
 
 
 if __name__ == '__main__':
