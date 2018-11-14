@@ -4,6 +4,8 @@
 @site: http://blog.jtahstu.com
 @time: 2018/8/10 14:39
 """
+import sys
+sys.path.append('/Users/jtusta/PycharmProjects/iPython/Work/ATS')
 from lib import Common
 from pprint import pprint
 from urllib.parse import urlparse
@@ -38,8 +40,9 @@ def init():
             a = li.select('.frmc_t > a')[0]
             title = a.text or ''
             href = domain + a.get('href') or ''
-        if len(li.select('span[title]')) > 0:
-            date = li.select('span[title]')[0].get('title') or ''
+        date = ''
+	if len(li.select('span[title]')) > 0:
+            date = li.select('span[title]')[0].get('title') or 'unknown'
         print(title, href, date)
         bbs = {'title': title, 'href': href, 'date': date}
         bbses.append(bbs)

@@ -25,8 +25,10 @@ index_urls = [
 ]
 
 
-def screen(url, browser):
-    file_path = const.screen_image_path + Common.parseUrl(url).netloc.replace('www.', '')
+def screen(url):
+    purl = Common.parseUrl(url)
+    file_path = (const.screen_image_path + (purl.netloc + purl.path).replace('/', '_')).replace('www.', '')
+    browser = Common.getSeleniumBrowser(url, display=False)
     browser.get_screenshot_as_file(file_path + "_header.png")
     print('save to {}'.format(file_path))
     js = "document.documentElement.scrollTop=10000"
@@ -57,8 +59,13 @@ def parserOneCoupon(node):
     coupon_id = node.select('.go_crd')[0].get('data-cid')
     merchant_logo = node.select('img')[0].get('src')
     merchant_name = node.select('img')[0].get('alt')
+    hrefs = node.select('a')
+    merchant_url = ''
+    for href in hrefs:
+        if not href.get('class'):
+            merchant_url = href.get('href')
     return {'title': title, 'coupon_id': coupon_id, 'link': link, 'merchant_name': merchant_name,
-            'merchant_logo': merchant_logo}
+            'merchant_logo': merchant_logo, 'merchant_url': merchant_url}
 
 
 def analyseCoupon(url, browser):
@@ -84,19 +91,19 @@ def analyseCoupon(url, browser):
 
     # 随机取一条促销，分析跳出链接
     a_coupon = random.choice(coupons_analyse)
-    if a_coupon['link']:
+    if a_coupon['link'] and a_coupon['merchant_url']:
         if a_coupon['link'].find('http') is -1:
             analyseLinkRDHistory(domain + a_coupon['link'])
+            screen(domain + a_coupon['merchant_url'])
         else:
             analyseLinkRDHistory(a_coupon['link'])
+            screen(a_coupon['merchant_url'])
 
 
 def handle(url):
     # 截图
-    browser = Common.getSeleniumBrowser(url, display=True)
     print('start screen')
-    screen(url, browser)
-    browser.quit()
+    screen(url)
 
     # 分析页面促销
     browser = Common.getSeleniumBrowser(url, display=False)
@@ -115,21 +122,21 @@ def init():
             print('{} has Error, msg: {}'.format(index_url, e))
             continue
     # 截图合并
-    print('start vertical merger images')
-    iImage.verticalMerger(const.screen_image_path, const.screen_all_output)
+    # print('start vertical merger images')
+    # iImage.verticalMerger(const.screen_image_path, const.screen_all_output)
 
-    # # 促销数据合并
-    # print('start merger index coupon data')
-    # all_coupon_data = []
-    # for coupon_file in Common.getSortedDirList(const.coupon_data_path):
-    #     site = coupon_file.split('.')[0]
-    #     with open(const.coupon_data_path + coupon_file, 'r') as r:
-    #         data = json.load(r)
-    #         for (key, item) in enumerate(data):
-    #             data[key].update({'site': site})
-    #         all_coupon_data.append(data)
-    # with open(const.coupon_data_output, 'w') as w:
-    #     w.writelines(json.dumps(all_coupon_data))
+    # 促销数据合并
+    print('start merger index coupon data')
+    all_coupon_data = []
+    for coupon_file in Common.getSortedDirList(const.coupon_data_path):
+        site = coupon_file.split('.')[0]
+        with open(const.coupon_data_path + coupon_file, 'r') as r:
+            data = json.load(r)
+            for (key, item) in enumerate(data):
+                data[key].update({'site': site})
+            all_coupon_data.append(data)
+    with open(const.coupon_data_output, 'w') as w:
+        w.writelines(json.dumps(all_coupon_data))
 
 
 if __name__ == '__main__':
