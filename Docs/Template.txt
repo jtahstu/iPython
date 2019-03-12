@@ -1,14 +1,13 @@
 1. Py Code Template
 
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
 # Version: 1.0
-# Author: jtahstu
-# Contact: root@jtahstu.com
-# Site: blog.jtahstu.com
+# Author: ${USER}
 # Software: ${PRODUCT_NAME}
 # Time: ${DATE} ${TIME}
+# Description: todo list
 
 
 def init():
