@@ -110,3 +110,7 @@ venv.bak/
 .DS_store
 .vscode/
 Work/
+Data/
+Log/
+Public/
+Config/
