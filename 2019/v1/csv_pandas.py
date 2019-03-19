@@ -25,8 +25,8 @@ def init():
     i = data_frame.loc[:, ['Date', 'Total Revenue']]
     # print(i)
 
-    # print(data_frame.loc[data_frame['Site'] == 'IFB', 'Total Revenue'])
-    # exit(-1)
+    print(list(data_frame.loc[data_frame['Site'] == 'IFB', 'Total Revenue']))
+    exit(-1)
     sum = pandas.DataFrame(float(str(v).replace(',', '')) for v in data_frame.loc[data_frame['Site'] == 'IFB', 'Total Revenue']).sum()
     print(sum)
     avg = pandas.DataFrame(float(str(v).replace(',', '')) for v in data_frame.loc[data_frame['Site'] == 'IFB', 'Total Revenue']).mean()
