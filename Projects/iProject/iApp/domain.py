@@ -12,7 +12,7 @@ import time
 
 
 def query(sql):
-    connection = pymysql.connect(host='localhost', user='jtahstu', password='jtahstu', db='iApp', port=3306,
+    connection = pymysql.connect(host='localhost', user='xxx', password='xxx', db='iApp', port=3306,
                                  charset='utf8')
     cursor = connection.cursor()
     cursor.execute(sql)
