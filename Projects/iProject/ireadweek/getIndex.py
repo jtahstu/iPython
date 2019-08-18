@@ -36,8 +36,8 @@ def getBookList(url,i):
 
 def saveBooks(title,author,classify,des,url,i):
     connection = pymysql.connect(host='localhost',
-                                 user='jtahstu',
-                                 password='jtahstu',
+                                 user='xxx',
+                                 password='xxx',
                                  db='spider',
                                  port=3306,
                                  charset='utf8')

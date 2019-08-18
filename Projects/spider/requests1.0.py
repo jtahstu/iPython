@@ -43,8 +43,8 @@ def getMovies(movieUrl):
         quote = item.select(".inq")[0].text.strip()
 
         connection = pymysql.connect(host='localhost',
-                                     user='jtahstu',
-                                     password='jtahstu',
+                                     user='xxx',
+                                     password='xxx',
                                      db='python',
                                      port=3306,
                                      charset='utf8')

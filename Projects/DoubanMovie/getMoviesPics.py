@@ -31,8 +31,8 @@ headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;
 def db(type, rank, detail=[]):
     res = ""
     connection = pymysql.connect(host='localhost',
-                                 user='jtahstu',
-                                 password='jtahstu',
+                                 user='xxx',
+                                 password='xxx',
                                  db='python',
                                  port=3306,
                                  charset='utf8')
